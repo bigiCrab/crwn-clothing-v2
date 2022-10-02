@@ -1,14 +1,6 @@
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Navigation from "./routers/navigation/navigation.component";
 import Home from "./routers/home/home.component";
-
-function Navigation() {
-  return (
-    <div>
-      <nav>i am nav</nav>
-      <Outlet />
-    </div>
-  );
-}
 
 const App = () => {
   return (
