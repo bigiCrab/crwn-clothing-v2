@@ -1,7 +1,7 @@
 import CategoryItem from "../category-item/category-item.component";
 import "./categories.styles.scss";
 
-export function Categories(props) {
+const Categories = (props) => {
   return (
     <div className="categories-container">
       {props.categories.map((category) => (
@@ -9,4 +9,5 @@ export function Categories(props) {
       ))}
     </div>
   );
-}
+};
+export default Categories;
