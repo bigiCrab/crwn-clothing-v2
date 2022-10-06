@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -8,18 +7,16 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyABKPgfmhbvZRwSu1O-W7_kHJenelpGH60",
-  authDomain: "crwn-clothing-db-e24dd.firebaseapp.com",
-  projectId: "crwn-clothing-db-e24dd",
-  storageBucket: "crwn-clothing-db-e24dd.appspot.com",
-  messagingSenderId: "272371013474",
-  appId: "1:272371013474:web:2d353c2cd7aeab8873fe3b",
-  measurementId: "G-F9QD1QNSSH",
+  apiKey: "AIzaSyB59TVpBfbJJybPY9rMGGzob6hWRg6U_GA",
+  authDomain: "crwn-clothing-db-b4d5d.firebaseapp.com",
+  projectId: "crwn-clothing-db-b4d5d",
+  storageBucket: "crwn-clothing-db-b4d5d.appspot.com",
+  messagingSenderId: "790526940905",
+  appId: "1:790526940905:web:de3576b7cbb66efaa90278"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const fireBaseApp = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
 
