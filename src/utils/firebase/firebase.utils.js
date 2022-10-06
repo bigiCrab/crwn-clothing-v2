@@ -2,7 +2,12 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithRedirect,
+} from "firebase/auth";
 import { getFirestore, setDoc, getDoc, doc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -19,9 +24,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const fireBaseApp = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
@@ -32,7 +37,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore(fireBaseApp);
 
@@ -40,7 +48,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   const userDocRef = doc(db, "user", userAuth.uid);
   console.log(userDocRef);
   const userSnapshot = await getDoc(userDocRef);
-  console.log(userSnapshot.exists());
+  console.log(userSnapshot.exists(),userSnapshot);
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createAt = new Date();
