@@ -5,17 +5,10 @@ import FormInput from "./../../components/form-input/form-input.component";
 import {
   auth,
   signInWithGooglePopup,
-  signInWithGoogleRedirect,
-  createUserProfileDocument,
   createUserDocumentFromAuth,
-  getUserByEmailAndPassword,
-} from "../../utils/firebase/firebase.utils";
-import Button from "../../components/button/button.component";
+} from '../../utils/firebase/firebase.utils';
 
-const defaultFormFields = {
-  email: "a@a.com",
-  password: "123456",
-};
+import SignUpForm from '../../components/sign-up-form/sign-up-form.component';
 
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -33,57 +26,14 @@ const SignIn = () => {
 
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
-    console.log(user);
-    createUserDocumentFromAuth(user);
-  };
-
-  const logGoogleUserRedirect = async () => {
-    const { user } = await signInWithGoogleRedirect();
-    console.log(user);
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormFields({ ...formFields, [name]: value });
+    const userDocRef = await createUserDocumentFromAuth(user);
   };
 
   return (
     <div>
       <h1>Sign In Page</h1>
-      <FormInput
-        label="email"
-        type="email"
-        required
-        onChange={handleChange}
-        name="email"
-        value={email}
-      />
-      <FormInput
-        label="password"
-        type="text"
-        required
-        onChange={handleChange}
-        name="password"
-        value={password}
-      ></FormInput>
-      <Button
-        onClick={async (event) => {
-          const user = await getUserByEmailAndPassword(email, password);
-          console.log(
-            "🚀 ~ file: sign-in.component.jsx ~ line 72 ~ onClick={async ~ user",
-            user
-          );
-        }}
-      >
-        Sign in
-      </Button>
-      <Button buttonType="google" onClick={logGoogleUser}>
-        Sign in with Google Popup
-      </Button>
-      {/* <Button buttonType="google" onClick={logGoogleUserRedirect}>
-        Sign in with Google redirect
-      </Button> */}
-      <SignUpForm></SignUpForm>
+      <button onClick={logGoogleUser}>Sign in with Google Popup</button>
+      <SignUpForm />
     </div>
   );
 };
