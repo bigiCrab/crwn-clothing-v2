@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithRedirect,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, setDoc, getDoc, doc } from "firebase/firestore";
 
@@ -82,4 +83,31 @@ export const createUserDocumentFromAuth = async (
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const getUserByEmailAndPassword = async (email, password) => {
+  console.log("🚀 ~ file: firebase.utils.js ~ line 89 ~ getUserByEmailAndPassword ~ email", email)
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    // Signed in
+    const user = userCredential.user;
+    console.log("🚀 ~ file: firebase.utils.js ~ line 93 ~ .then ~ user", user);
+    return user;
+    // ...
+  } catch (error) {
+    const errorCode = error.code;
+    console.log(
+      "🚀 ~ file: firebase.utils.js ~ line 101 ~ signInWithEmailAndPassword ~ errorCode",
+      errorCode
+    );
+    const errorMessage = error.message;
+    console.log(
+      "🚀 ~ file: firebase.utils.js ~ line 103 ~ signInWithEmailAndPassword ~ errorMessage",
+      errorMessage
+    );
+  }
 };
